@@ -4,6 +4,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './styles';
 import {auth} from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { db } from '../../firebase';
+
+import { doc, getDoc } from "firebase/firestore";
+
+
 
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
@@ -13,7 +18,7 @@ export default function LoginScreen({navigation}) {
         navigation.navigate('Registration')
     }
 
-    const onLoginPress =  (e) =>{
+    const onLoginPress = (e) => {
         signInWithEmailAndPassword(auth,email, password)
         .then((userCredential) => {
             // Signed in
@@ -27,16 +32,16 @@ export default function LoginScreen({navigation}) {
             console.log(errorCode, errorMessage)
         });
     }
-
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
+                style={{ flex: 1, width: '100%', height: '100%'}}
                 keyboardShouldPersistTaps="always">
-                <Image
+                <Image 
                     style={styles.logo}
-                    source={require('../../assets/logo.png')}
+                    source={require('../../../assets/logo.png')}
                 />
+                <View style={{ height: '50%' , width: '100%'}}>
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -56,6 +61,7 @@ export default function LoginScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>

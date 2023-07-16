@@ -3,15 +3,17 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
     },
     title: {
 
     },
     logo: {
-        flex: 1,
-        height: 120,
-        width: 90,
+        resizeMode: 'contain',
+        width: "75%",
+        height: "50%",
         alignSelf: "center",
         margin: 30
     },

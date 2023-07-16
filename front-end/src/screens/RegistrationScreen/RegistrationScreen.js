@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import {auth} from '../../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 
 
 export default function RegistrationScreen({navigation}) {
@@ -22,19 +22,23 @@ export default function RegistrationScreen({navigation}) {
             return;
         }
         await createUserWithEmailAndPassword(auth,email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            navigation.navigate('Login')
-            // ...
-        })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
             // ..
         });
+        /*
+         await sendEmailVerification(auth.currentUser).catch((err) =>
+        console.log(err)
+      );
+        */
+
+        await updateProfile(auth.currentUser, { displayName: fullName }).catch((error) => {
+            console.log(error);
+        });
+
+        navigation.navigate('Login');
     }
 
     return (
@@ -44,7 +48,7 @@ export default function RegistrationScreen({navigation}) {
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../assets/logo.png')}
+                    source={require('../../../assets/logo.png')}
                 />
                 <TextInput
                     style={styles.input}
