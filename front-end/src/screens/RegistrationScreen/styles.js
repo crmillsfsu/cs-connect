@@ -3,17 +3,21 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '100%',
+        width: '100%'
     },
     title: {
 
     },
     logo: {
-        flex: 1,
-        height: 120,
-        width: 90,
+        resizeMode: 'contain',
+        width: "75%",
+        height: "40%",
         alignSelf: "center",
-        margin: 30
+        marginTop: "2.5%",
+        marginBottom: "2.5%"
+        
     },
     input: {
         height: 48,

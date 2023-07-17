@@ -37,19 +37,18 @@ export default function RegistrationScreen({navigation}) {
         await updateProfile(auth.currentUser, { displayName: fullName }).catch((error) => {
             console.log(error);
         });
-
-        navigation.navigate('Login');
     }
 
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
+                style={{ flex: 1, width: '100%', height: '100%' }}
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
                     source={require('../../../assets/logo.png')}
                 />
+                <View style={{ width: '100%', height: '60%' }}>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
@@ -88,6 +87,7 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
